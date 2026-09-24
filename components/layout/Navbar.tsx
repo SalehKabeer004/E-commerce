@@ -37,7 +37,7 @@ export function BookooHeader() {
           </span>
           <span className="hidden leading-none sm:block">
             <span className="block text-[17px] font-bold tracking-tight text-slate-800">Bookoo</span>
-            <span className="mt-1 block text-[8px] font-medium uppercase tracking-[0.16em] text-slate-400">Book store website</span>
+            <span className="mt-1 block text-[12px] font-medium uppercase tracking-[0.16em] text-slate-400">Book store website</span>
           </span>
         </a>
 
@@ -57,7 +57,7 @@ export function BookooHeader() {
             aria-label="Search category"
             value={category}
             onChange={(event) => setCategory(event.target.value)}
-            className="hidden h-10 border-r border-slate-200 bg-transparent px-3 text-[11px] font-medium text-slate-500 outline-none sm:block"
+            className="hidden h-10 border-r border-slate-200 bg-transparent px-3 text-[12px] font-medium text-slate-500 outline-none sm:block"
           >
             {categories.map((item) => <option key={item}>{item}</option>)}
           </select>
@@ -74,12 +74,12 @@ export function BookooHeader() {
           </a>
           <a href="#cart" aria-label="Cart, 3 items" className="relative text-slate-500 transition hover:text-violet-600">
             <ShoppingCart className="size-[18px]" strokeWidth={1.8} />
-            <span className="absolute -right-2.5 -top-2 flex min-w-4 items-center justify-center rounded-full bg-orange-500 px-1 text-[9px] font-bold leading-4 text-white">3</span>
+            <span className="absolute -right-2.5 -top-2 flex min-w-4 items-center justify-center rounded-full bg-orange-500 px-1 text-[12px] font-bold leading-4 text-white">3</span>
           </a>
           <a href="#profile" aria-label="Your profile" className="flex size-8 items-center justify-center rounded-full bg-violet-100 text-violet-700 ring-2 ring-white">
             <UserRound className="size-4" />
           </a>
-          <button type="button" className="hidden items-center gap-1 text-[11px] font-semibold text-slate-500 sm:flex" aria-label="Choose language">
+          <button type="button" className="hidden items-center gap-1 text-[12px] font-semibold text-slate-500 sm:flex" aria-label="Choose language">
             EN <ChevronDown className="size-3" />
           </button>
         </div>
