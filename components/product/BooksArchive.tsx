@@ -10,7 +10,7 @@ interface Product {
   author: string
   category: string
   rating: number
-  price: number 
+  price: number
   coverImage: string
 }
 
@@ -24,7 +24,7 @@ export default function BookooArchive() {
   const [favorites, setFavorites] = useState<string[]>([])
   const [filtersOpen, setFiltersOpen] = useState(true)
   const [search, setSearch] = useState('')
-  
+
   // API State Handling
   const [books, setBooks] = useState<Product[]>([])
   const [loading, setLoading] = useState(true)
@@ -139,35 +139,37 @@ export default function BookooArchive() {
               {filtered.map((book, index) => {
                 const liked = favorites.includes(book._id)
                 return (
-                  <article key={book._id} className="group relative min-w-0">
-                    <div
-                      className="relative flex h-64 flex-col justify-end overflow-hidden rounded-md bg-cover bg-center p-3 text-white shadow-[0_8px_16px_rgba(28,30,70,0.14)] transition group-hover:-translate-y-1"
-                      style={{ backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.8)), url(${book.coverImage})` }}
-                    >
-                      <span className="absolute left-0 top-3 rounded-r-md bg-[#ff775e] px-2 py-1 text-xs font-black">
-                        {index % 3 === 0 ? '30%' : index % 3 === 1 ? '50%' : '40%'}
-                      </span>
-                      <button
-                        type="button"
-                        aria-label={`${liked ? 'Remove' : 'Add'} ${book.title} wishlist`}
-                        onClick={() => setFavorites(liked ? favorites.filter((id) => id !== book._id) : [...favorites, book._id])}
-                        className="absolute right-2 top-2 rounded-full bg-white/90 p-1.5 text-violet-500"
+                  <a key={book._id} href={`${window.location.href}/${book._id}`}>
+                    <article  className="group relative min-w-0">
+                      <div
+                        className="relative flex h-64 flex-col justify-end overflow-hidden rounded-md bg-cover bg-center p-3 text-white shadow-[0_8px_16px_rgba(28,30,70,0.14)] transition group-hover:-translate-y-1"
+                        style={{ backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.8)), url(${book.coverImage})` }}
                       >
-                        <Heart className={`size-3 ${liked ? 'fill-current' : ''}`} />
-                      </button>
-                      <p className="relative text-[13px] font-black uppercase leading-[1.05] tracking-tight">{book.title}</p>
-                      <p className="relative mt-1 text-[8px] font-semibold uppercase tracking-wider text-white/90">{book.author}</p>
-                    </div>
+                        <span className="absolute left-0 top-3 rounded-r-md bg-[#ff775e] px-2 py-1 text-xs font-black">
+                          {index % 3 === 0 ? '30%' : index % 3 === 1 ? '50%' : '40%'}
+                        </span>
+                        <button
+                          type="button"
+                          aria-label={`${liked ? 'Remove' : 'Add'} ${book.title} wishlist`}
+                          onClick={() => setFavorites(liked ? favorites.filter((id) => id !== book._id) : [...favorites, book._id])}
+                          className="absolute right-2 top-2 rounded-full bg-white/90 p-1.5 text-violet-500"
+                        >
+                          <Heart className={`size-3 ${liked ? 'fill-current' : ''}`} />
+                        </button>
+                        <p className="relative text-[13px] font-black uppercase leading-[1.05] tracking-tight">{book.title}</p>
+                        <p className="relative mt-1 text-[8px] font-semibold uppercase tracking-wider text-white/90">{book.author}</p>
+                      </div>
 
-                    <h3 className="mt-2 truncate text-xs font-bold text-slate-700">{book.title}</h3>
-                    <p className="truncate text-[8px] uppercase text-violet-500 font-semibold">{book.category}</p>
-                    <div className="mt-1 flex items-center justify-between">
-                      <span className="flex items-center gap-0.5 text-[10px] font-bold text-[#ff775e]">
-                        <Star className="size-2.5 fill-current" />{book.rating}
-                      </span>
-                      <span className="text-xs font-black text-slate-700">${book.price}</span>
-                    </div>
-                  </article>
+                      <h3 className="mt-2 truncate text-xs font-bold text-slate-700">{book.title}</h3>
+                      <p className="truncate text-[8px] uppercase text-violet-500 font-semibold">{book.category}</p>
+                      <div className="mt-1 flex items-center justify-between">
+                        <span className="flex items-center gap-0.5 text-[10px] font-bold text-[#ff775e]">
+                          <Star className="size-2.5 fill-current" />{book.rating}
+                        </span>
+                        <span className="text-xs font-black text-slate-700">${book.price}</span>
+                      </div>
+                    </article>
+                  </a>
                 )
               })}
             </div>

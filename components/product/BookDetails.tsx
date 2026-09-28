@@ -55,9 +55,9 @@ export default function BookooDetail() {
 
   // 2. Direct Stripe Payment Session Trigger
   const handleCheckout = async () => {
-    if (!product) return
-    setCheckoutLoading(true)
-
+    if (!product) return;
+    setCheckoutLoading(true);
+  
     try {
       const response = await fetch('http://localhost:5000/api/checkout/create-checkout-session', {
         method: 'POST',
@@ -66,27 +66,34 @@ export default function BookooDetail() {
           cartItems: [
             {
               _id: product._id,
-              title: product.title,
+              title: product.title || product.title,
               price: product.price,
               coverImage: product.coverImage,
               quantity: quantity,
             },
           ],
         }),
-      })
-
-      const data = await response.json()
+      });
+  
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error('Server returned non-JSON error:', errorText);
+        alert('Backend endpoint missing ya server error hai.');
+        return;
+      }
+  
+      const data = await response.json();
       if (data.url) {
-        window.location.href = data.url
+        window.location.href = data.url;
       }
     } catch (error) {
-      console.error('Checkout error:', error)
+      console.error('Checkout error:', error);
     } finally {
-      setCheckoutLoading(false)
+      setCheckoutLoading(false);
     }
-  }
+  };
 
-  if (loading) {
+  if (loading || !product) {
     return (
       <div className="flex min-h-[60vh] items-center justify-center text-slate-400">
         Loading book details...
@@ -119,8 +126,8 @@ export default function BookooDetail() {
         {/* Book Cover Image */}
         <div className="relative mx-auto flex h-[430px] w-[300px] overflow-hidden rounded-2xl bg-slate-100 shadow-[0_18px_35px_rgba(27,36,64,0.2)] sm:h-[500px] sm:w-[350px] lg:mx-0 lg:h-[500px] lg:w-[350px]">
           <Image
-            src={product.coverImage}
-            alt={product.title}
+            src={product.coverImage || 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c'}
+            alt={product.title || 'Book Cover'}
             fill
             className="object-cover"
             priority

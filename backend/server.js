@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 import connectDB from './config/db.js';
 import productRoutes from './routes/productRoutes.js';
+import checkoutRoutes from './routes/checkoutRoutes.js';
 
 // Load Environment Variables
 dotenv.config();
@@ -17,6 +18,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use('/api/products', productRoutes);
+app.use('/api/checkout', checkoutRoutes);
 
 // Basic Test Route
 app.get('/', (req, res) => {
