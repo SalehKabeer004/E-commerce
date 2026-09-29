@@ -19,6 +19,8 @@ interface Product {
   author: string
 }
 
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+
 function Stars({ rating = 4.5 }: { rating?: number }) {
   return (
     <span className="flex items-center gap-1 text-sm font-bold text-[#ff775e]">
@@ -41,7 +43,7 @@ export default function BookooDetail() {
     if (!id) return
     const fetchProduct = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/api/products/${id}`)
+        const response = await fetch(`${API_BASE_URL}/api/products/${id}`)
         const data = await response.json()
         setProduct(data)
       } catch (error) {
@@ -59,7 +61,7 @@ export default function BookooDetail() {
     setCheckoutLoading(true);
   
     try {
-      const response = await fetch('http://localhost:5000/api/checkout/create-checkout-session', {
+      const response = await fetch(`${API_BASE_URL}/api/checkout/create-checkout-session`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

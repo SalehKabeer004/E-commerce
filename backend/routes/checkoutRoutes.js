@@ -3,6 +3,7 @@ import Stripe from 'stripe';
 
 const router = express.Router();
 
+const CLIENT_URL = process.env.CLIENT_URL || 'http://localhost:3000';
 
 router.post('/create-checkout-session', async (req, res) => {
   const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
@@ -29,8 +30,8 @@ router.post('/create-checkout-session', async (req, res) => {
       payment_method_types: ['card'],
       line_items: lineItems,
       mode: 'payment',
-      success_url: `http://localhost:3000/success`,
-      cancel_url: `http://localhost:3000/books`,
+      success_url: `${CLIENT_URL}/success`,
+      cancel_url: `${CLIENT_URL}/books`,
     });
 
     res.json({ id: session.id, url: session.url });

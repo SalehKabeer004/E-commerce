@@ -19,6 +19,8 @@ const groups = [
   ['Most Commented', []], ['Newest Books', []], ['Featured', []], ['Watch History', []], ['Best Books', []],
 ] as const
 
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+
 export default function BookooArchive() {
   const [activeTab, setActiveTab] = useState('Today')
   const [favorites, setFavorites] = useState<string[]>([])
@@ -33,7 +35,7 @@ export default function BookooArchive() {
   useEffect(() => {
     const fetchBooks = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/products')
+        const response = await fetch(`${API_BASE_URL}/api/products`)
         const data = await response.json()
         setBooks(data)
       } catch (error) {
