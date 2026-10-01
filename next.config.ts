@@ -7,12 +7,15 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: 'images.unsplash.com',
       },
-      // Agar aap ke backend/database mein kisi aur domain (e.g. Cloudinary, S3, etc.) ki images hain, unhe bhi yahan add kar dein:
-      // {
-      //   protocol: 'https',
-      //   hostname: 'res.cloudinary.com',
-      // },
     ],
+  },
+  async rewrites() {
+    return [
+      {
+        source: "/api/:path*",
+        destination: "https://e-commerce-nine-vert-99.vercel.app/api/:path*", // Aapka live backend API endpoint
+      },
+    ];
   },
 };
 

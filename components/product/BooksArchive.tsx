@@ -35,7 +35,7 @@ export default function BookooArchive() {
   useEffect(() => {
     const fetchBooks = async () => {
       try {
-        const response = await fetch(`${API_BASE_URL}/api/products`)
+        const response = await fetch('/api/products');
         const data = await response.json()
         setBooks(data)
       } catch (error) {

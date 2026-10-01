@@ -43,7 +43,7 @@ export default function BookooDetail() {
     if (!id) return
     const fetchProduct = async () => {
       try {
-        const response = await fetch(`${API_BASE_URL}/api/products/${id}`)
+        const response = await fetch(`/api/products/${id}`)
         const data = await response.json()
         setProduct(data)
       } catch (error) {
@@ -61,7 +61,7 @@ export default function BookooDetail() {
     setCheckoutLoading(true);
   
     try {
-      const response = await fetch(`${API_BASE_URL}/api/checkout/create-checkout-session`, {
+      const response = await fetch('/api/checkout/create-checkout-session', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
